@@ -1,0 +1,38 @@
+public class Quick_sort{
+    public static void quicksort(int arr[],int f,int l){
+        if(f<l){
+            int p=partition(arr,f,l);
+            quicksort(arr,f,p-1);
+            quicksort(arr,p+1,l);
+        }
+    }
+    public static int partition(int arr[],int f,int l){
+        int pivot=arr[l];
+        int i=f-1;
+        for(int j=f;j<=l-1;j++){
+            if(arr[j]<pivot){
+                i++;
+                swap(arr,i,j);
+            }
+        }
+        swap(arr,i+1,l);
+        return (i+1);
+    }
+    public static void swap(int arr[],int i,int j){
+        int temp=arr[i];
+        arr[i]=arr[j];
+        arr[j]=temp;
+    }
+    public static void print(int arr[]){
+        for(int i=0;i<arr.length;i++){
+            System.out.print(arr[i]+" ");
+        }
+    }
+    public static void main(String args[]){
+        int arr[]={45,12,90,49,10};
+        int f=0;
+        int l=arr.length-1;
+        quicksort(arr,f,l);
+        print(arr);
+    }
+}
