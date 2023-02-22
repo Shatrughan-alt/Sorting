@@ -36,3 +36,47 @@ public class Quick_sort{
         print(arr);
     }
 }
+
+
+
+OR
+
+
+public class quick1 {
+    public static void sort(int arr[],int p,int q)
+    {
+        if(p<q){
+            int m=partition(arr,p,q);
+            sort(arr,p,m-1);
+            sort(arr,m+1,q);
+        }
+    }
+    public static int partition(int arr[],int p,int q){
+        int x=arr[p];
+        int i=p,j;
+        for(j=p+1;j<q;j++){
+            if(arr[j]<x){
+                i++;
+                int temp=arr[i];
+                arr[i]=arr[j];
+                arr[j]=temp;
+            }
+        }
+        int temp=arr[i];
+        arr[i]=arr[p];
+        arr[p]=temp;
+        return i;
+    }
+    public static void print(int arr[]){
+        for(int i=0;i<arr.length;i++){
+            System.out.print(arr[i]+" ");
+        }
+    }
+    public static void main(String args[]){
+        int arr[]={5,4,3,7,8};
+        int n=arr.length;
+        sort(arr,0,n-1);
+        print(arr);
+    }
+}
+
