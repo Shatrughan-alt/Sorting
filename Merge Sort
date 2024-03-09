@@ -1,52 +1,61 @@
-public class merge1 {
-    public static void sort(int arr[],int p,int r){
-        if(p<r){
-        int q=p+(r-p)/2;
-        sort(arr,p,q);
-        sort(arr,q+1,r);
-        merge(arr,p,q,r);
+import java.util.*;
+
+public class merge {
+    public static void merge(int arr[],int start,int end){
+        if(start<end){
+            int partition=start+(end-start)/2;
+            merge(arr,start,partition);
+            merge(arr,partition+1,end);
+            abmergekro(arr,start,partition,end);
         }
     }
-    public static void merge(int arr[],int p,int q,int r){
-        int n1=q-p+1;
-        int n2=r-q;
-        int l[]=new int[n1];
-        int o[]=new int[n1];
+    public static void abmergekro(int arr[],int start,int mid,int end){
+        int n1=mid-start+1;
+        int n2=end-mid;
+        int left[]=new int[mid-start+1];
+        int right[]=new int[end-mid];
         for(int i=0;i<n1;i++){
-            l[i]=arr[p+i];
+            left[i]=arr[start+i];
         }
-        for(int j=0;j<n2;j++){
-            o[j]=arr[q+1+j];
+        for(int i=0;i<n2;i++){
+            right[i]=arr[mid+i+1];
         }
-        int i=0,k=p,j=0;
+        int i=0,j=0,k=start;
         while(i<n1&&j<n2){
-            if(l[i]<=o[j]){
-                arr[k]=l[i];
+            if(left[i]<=right[j]){
+                arr[k]=left[i];
                 i++;
+                k++;
             }
             else{
-                arr[k]=o[j];
+                arr[k]=right[j];
                 j++;
+                k++;
             }
-            k++;
         }
         while(i<n1){
-            arr[k]=l[i];
+            arr[k]=left[i];
             i++;k++;
         }
-        while(i<n2){
-            arr[k]=o[j];
-            j++;k++;
+        while (j < n2) {
+            arr[k] = right[j];
+            j++;
+            k++;
         }
     }
-    public static void print(int arr[]){
-        for(int i=0;i<arr.length;i++){
-            System.out.print(arr[i]+" ");
+    public static void print(int arr[]) {
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
         }
     }
     public static void main(String[] args) {
-        int arr[]={50,3,5,8,2,1};
-        sort(arr,0,arr.length-1);
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int arr[] = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+        merge(arr,0,arr.length-1);
         print(arr);
     }
 }
